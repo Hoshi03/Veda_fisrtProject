@@ -1,9 +1,44 @@
 #include <iostream>
+#include "MemberManager.h"
 
 using namespace std;
 
 int main() {
-    cout << "hi, hello, ì•ˆë…•\n";
 
-    return 0;
+	MemberManager memberManager;
+	Member currentMember();
+
+	while (true)
+	{
+
+		cout << "1 : »ç¿ëÀÚ µî·Ï\n2 : ¸ğµç »ç¿ëÀÚ ¸®½ºÆ® °Ë»ö\n3 : »ç¿ëÀÚ ·Î±×ÀÎ\n4 : ÇöÀç »ç¿ëÀÚ Á¤º¸ °¡Á®¿À±â\n";
+
+		int tmp;
+		cin >> tmp;
+
+		if (tmp == 1)
+		{
+			memberManager.registration();
+		}
+
+		if (tmp == 2)
+		{
+			memberManager.searchAllMember();
+		}
+
+		if (tmp == 3)
+		{
+			memberManager.login();
+		}
+
+		if (tmp == 4)
+		{
+			memberManager.getCurrentMemberStatus();
+		}
+
+		if (tmp == -1)
+		{
+			return 0;
+		}
+	}
 }
