@@ -1,11 +1,44 @@
-﻿#include "MemberManager.h"
+﻿#include <fstream>
+#include "MemberManager.h"
+#include "account.h"
 #include <algorithm>
 
 using namespace std;
 
+unique_ptr< vector<Member> > MemberManager::readFile() {
+	auto vectorPtr = make_unique<std::vector<Member>>();
+	ifstream fin;
+	fin.open("C:\\Users\\change08\\Desktop\\Veda_fisrtProject\\info.txt");
+
+	if (!fin.is_open()) {
+		return vectorPtr;
+	}
+	int memberCount;
+	fin >> memberCount;
+
+	string name, id, pwd;
+	int accountCount;
+	for (int i = 0; i < memberCount; i++) {
+		fin >> name >> id >> pwd;
+		(*vectorPtr).emplace_back(Member(name, id, pwd));
+		fin >> accountCount;
+
+		int accountId;
+		long long money;
+		string date;
+		for (int j = 0; j < accountCount; j++) {
+			fin >> accountId >> money >> date;
+			(*vectorPtr)[i].addAccount(Account(accountId, money, Date(date)));
+		}
+	}
+
+	fin.close();
+
+	return vectorPtr;
+}
 
 MemberManager::MemberManager() {
-
+	this->memberList = *readFile();
 }
 
 void MemberManager::registration() {

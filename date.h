@@ -11,6 +11,7 @@ public:
     Date();
     Date(const int year, const int month, const int day)
     : year(year), month(month), day(day) {}
+    Date(string);
     string toString() const;
 
 };

@@ -1,6 +1,7 @@
 #include <sstream>
 #include <iomanip>
 #include <ctime>
+#include <vector>
 
 #include "date.h"
 
@@ -22,6 +23,26 @@ Date::Date() {
     this->year = date.tm_year + 1900;
     this->month = date.tm_mon + 1;
     this->day = date.tm_mday;
+}
+
+vector<string> split(string str, char Delimiter) {
+    istringstream iss(str);
+    string buffer;
+
+    vector<string> result;
+
+    while (getline(iss, buffer, Delimiter)) {
+        result.push_back(buffer);
+    }
+
+    return result;
+}
+
+Date::Date(string date) {
+    vector<string> ymd = split(date, '-');
+    this->year = stoi(ymd[0]);
+    this->month = stoi(ymd[1]);
+    this->day = stoi(ymd[2]);
 }
 
 string Date::toString() const {

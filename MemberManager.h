@@ -10,8 +10,13 @@ class MemberManager
 {
     vector<Member> memberList;
     Member* currentMember = NULL;
+
+    // File IO 함수
+    static unique_ptr< vector<Member> > readFile();
+    void writeFile();
 public:
     MemberManager();
+    ~MemberManager();
 
     void registration();
     void searchAllMember();
