@@ -14,6 +14,7 @@ public:
     bool deposit(long long money);
     bool withdraw(long long money);
     string toString();
+    int getId();
 };
 
 #endif //DEPOSIT_H

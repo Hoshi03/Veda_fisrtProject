@@ -10,8 +10,10 @@ class MemberManager
 {
     vector<Member> memberList;
     Member* currentMember = NULL;
+
 public:
     MemberManager();
+    ~MemberManager();
 
     void registration();
     void searchAllMember();

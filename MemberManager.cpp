@@ -5,8 +5,67 @@ using namespace std;
 
 
 MemberManager::MemberManager() {
+    ifstream file("output.txt");
+    if (file.is_open()) {
+        string numMembers;
+        file >> getline(file, numbers);
+        int numMembersInt = stoi(numMembers);
+//        file.ignore(); // 개행 문자 무시
 
+        for (int i = 0; i < numMembersInt; ++i) {
+            string name, id, pwd;
+            getline(file, name, ' ');
+            getline(file, id, ' ');
+            getline(file, pwd);
+
+            Member member(name, id, pwd);
+
+            string numAccounts;
+            file >> getline(file, numAccounts);
+//            file.ignore(); // 개행 문자 무시
+            int numAccountsInt = stoi(numAccounts);
+
+
+            for (int j = 0; j < numAccountsInt; ++j) {
+                string accountId;
+                double money;
+                file >> accountId >> money;
+                Account account(accountId, money);
+                member.addAccount(account);
+            }
+
+            memberList.push_back(member);
+        }
+
+        file.close();
+    } else {
+        cout << "파일을 열 수 없습니다: " << filename << endl;
+    }
 }
+
+MemberManager::~MemberManager() {
+    ofstream file("output.txt");
+    if (file.is_open()) {
+        int tmp = memberList.size();
+        file << tmp << '\n';
+        for (auto i = memberList.begin(); i != memberList.end(); i++)
+        {
+            file << (*i).getName() << " " << (*i).getId() << " " << (*i).getPwd() << '\n';
+            tmp = (*i).getAccount().size();
+            file << tmp << '\n';
+
+            for (auto j = (*i).getAccount().begin(); j != (*i).getAccount().end(); j++)
+            {
+                file << (*j).getId() << " " << (*j).getMoney() << '\n';
+            }
+        }
+        file.close();
+    }
+    else {
+        cout << "error" << endl;
+    }
+}
+
 
 void MemberManager::registration() {
 	cout << "enter member name, Id, PW\n";
@@ -19,7 +78,7 @@ void MemberManager::registration() {
 
 void MemberManager::searchAllMember() {
 
-	cout << "search all registerd members" << '\n';
+	cout << "search all registered members" << '\n';
 	for (auto i = memberList.begin(); i != memberList.end(); i++)
 	{
 		cout << "name : " <<  (*i).getName() << " ID : " << (*i).getId();

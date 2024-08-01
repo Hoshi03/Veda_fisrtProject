@@ -36,11 +36,7 @@ int main() {
 		{
 			return 0;
 		}
-
 		(memberManager.*commands[tmp - 1])();
-
-		
-
 	}
 
 }

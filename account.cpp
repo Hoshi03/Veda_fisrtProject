@@ -39,3 +39,7 @@ string Account::toString() {
 
     return oss.str();
 }
+
+int Account::getId() {
+    return accountId;
+}
