@@ -127,11 +127,15 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="account.cpp" />
+    <ClCompile Include="date.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Member.cpp" />
     <ClCompile Include="MemberManager.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="account.h" />
+    <ClInclude Include="date.h" />
     <ClInclude Include="Member.h" />
     <ClInclude Include="MemberManager.h" />
   </ItemGroup>

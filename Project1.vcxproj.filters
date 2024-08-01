@@ -24,12 +24,24 @@
     <ClCompile Include="MemberManager.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="account.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="date.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Member.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="MemberManager.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="account.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="date.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>
