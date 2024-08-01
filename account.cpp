@@ -1,5 +1,12 @@
 #include "account.h"
 
+Account::Account(int accountId, long long money) throw(const char*) {
+    if (accountId < 0) throw "계좌 ID는 양수여야 합니다.\n";
+    if (money < 0) throw "잔액은 음수일 수 없습니다.\n";
+    this->accountId = accountId;
+    this->money = money;
+}
+
 long long Account::getMoney() const {
     return this->money;
 }
