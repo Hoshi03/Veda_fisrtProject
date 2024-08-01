@@ -1,16 +1,19 @@
 ﻿#include "MemberManager.h"
 #include <algorithm>
+#include<iostream>
+#include<fstream>
+#include <string>
 
 using namespace std;
 
 
 MemberManager::MemberManager() {
-    ifstream file("output.txt");
+	string src = "output.txt";
+    ifstream file(src);
     if (file.is_open()) {
         string numMembers;
-        file >> getline(file, numbers);
+		getline(file, numMembers);
         int numMembersInt = stoi(numMembers);
-//        file.ignore();
 
         for (int i = 0; i < numMembersInt; ++i) {
             string name, id, pwd;
@@ -21,25 +24,28 @@ MemberManager::MemberManager() {
             Member member(name, id, pwd);
 
             string numAccounts;
-            file >> getline(file, numAccounts);
-//            file.ignore();
+            getline(file, numAccounts);
             int numAccountsInt = stoi(numAccounts);
 
 
             for (int j = 0; j < numAccountsInt; ++j) {
                 string accountId;
-                double money;
-                file >> accountId >> money;
-                Account account(accountId, money);
-                member.addAccount(account);
+                string money;
+
+				//getline < - stoi나 stod 등으로 형식 변환, file << 형태는 알잘딱
+				getline(file, accountId, ' ');
+				getline(file, money);
+                //file >> accountId >> money;
+                Account account(stoi(accountId), stod(money)); 
+				member.addAcount(account);
+
             }
 
             memberList.push_back(member);
         }
-
         file.close();
     } else {
-        cout << "파일을 열 수 없습니다: " << filename << endl;
+        cout << src << "파일을 열 수 없습니다" << '\n';
     }
 }
 
