@@ -29,6 +29,13 @@ vector<Account>& Member::getAccount() {
 	return accountList;
 }
 
-void Member::addAcount(Account newAccount) {
+void Member::addAcount() {
+	int tmpId = accountList.size() + 1;
+	long long tmpMoney;
+	cout << "������ �ʱ��ڱ��� �Է����ּ���\n";
+	cin >> tmpMoney;
+
+	Account newAccount(tmpId, tmpMoney);
 	accountList.push_back(newAccount);
 }
+

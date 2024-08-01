@@ -1,6 +1,6 @@
 #pragma once
 #include <iostream>
-#include <list>
+#include <string>
 #include <vector>
 #include "Member.h"
 
@@ -10,6 +10,10 @@ class MemberManager
 {
     vector<Member> memberList;
     Member* currentMember = NULL;
+
+    // 파일 입출력 함수
+    static vector<Member>& readFile();
+    void writeFile();
 public:
     MemberManager();
 

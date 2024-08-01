@@ -10,6 +10,8 @@ class Account {
     Date regDate;
 public:
     Account(int accountId, long long money) throw(const char*);
+    Account(int accountId, long long money, Date date)
+        : accountId(accountId), money(money), regDate(date) {}
     long long getMoney() const;
     bool deposit(long long money);
     bool withdraw(long long money);

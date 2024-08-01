@@ -18,6 +18,6 @@ class Member{
         string getPwd();
         vector<Account>& getAccount();
 
-        void addAcount(Account newAccount);
+        void addAcount();
 
 };
