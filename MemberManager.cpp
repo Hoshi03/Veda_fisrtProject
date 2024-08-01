@@ -9,8 +9,11 @@ using namespace std;
 vector<Member>* MemberManager::readFile() {
 	vector<Member>* vectorPtr = new vector<Member>;
 	ifstream fin;
+#if defined(_WIN32) || defined(_WIN64)
 	fin.open("C:\\Users\\change08\\Desktop\\Veda_fisrtProject\\info.txt");
-
+#else
+	fin.open("info.txt");
+#endif
 	if (!fin.is_open()) {
 		return vectorPtr;
 	}
@@ -39,8 +42,11 @@ vector<Member>* MemberManager::readFile() {
 }
 
 void MemberManager::writeFile() {
+#if defined(_WIN32) || defined(_WIN64)
 	ofstream fout("C:\\Users\\change08\\Desktop\\Veda_fisrtProject\\info.txt");
-
+#else
+	ofstream fout("info.txt");
+#endif
 	if (!fout.is_open()) {
 		cerr << "Error opening file for writing\n";
 		return;
@@ -70,7 +76,6 @@ MemberManager::MemberManager() {
 
 MemberManager::~MemberManager() {
 	this->writeFile();
-	delete &(this->memberList);
 }
 
 void MemberManager::registration() {
