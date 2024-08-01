@@ -8,59 +8,30 @@ using namespace std;
 int main() {
 
 	MemberManager memberManager;
-	Member currentMember();
+	Member currentMember(); // ì—†ì–´ë„ ë˜ëŠ”..?
+
+	vector< void (MemberManager::*)() > commands;
+	commands.emplace_back(&MemberManager::registration);
+	commands.emplace_back(&MemberManager::searchAllMember);
+	commands.emplace_back(&MemberManager::getCurrentMemberStatus);
+	commands.emplace_back(&MemberManager::addAccount);
+	commands.emplace_back(&MemberManager::logout);
 
 	while (true)
 	{
 
-		cout << "1 : »ç¿ëÀÚ µî·Ï\n2 : ¸ğµç »ç¿ëÀÚ ¸®½ºÆ® °Ë»ö\n3 : »ç¿ëÀÚ ·Î±×ÀÎ\n4 : ÇöÀç »ç¿ëÀÚ Á¤º¸ °¡Á®¿À±â\n5 : °èÁÂ Ãß°¡ÇÏ±â\n6 : ·Î±×¾Æ¿ô\n-1 : Á¾·á\n";
+		cout << "1 : ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½\n2 : ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Æ® ï¿½Ë»ï¿½\n3 : ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Î±ï¿½ï¿½ï¿½\n4 : ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½\n5 : ï¿½ï¿½ï¿½ï¿½ ï¿½ß°ï¿½ï¿½Ï±ï¿½\n6 : ï¿½Î±×¾Æ¿ï¿½\n-1 : ï¿½ï¿½ï¿½ï¿½\n";
 
 		int tmp;
 		cin >> tmp;
 
-		if (tmp == 1)
-		{
-			memberManager.registration();
-		}
-
-		if (tmp == 2)
-		{
-			memberManager.searchAllMember();
-		}
-
-		if (tmp == 3)
-		{
-			memberManager.login();
-		}
-
-		if (tmp == 4)
-		{
-			memberManager.getCurrentMemberStatus();
-		}
-
-		if (tmp == 5)
-		{
-			memberManager.addAccount();
-		}
-
-		if (tmp == 6)
-		{
-			memberManager.logout();
-		}
-
-
+		(memberManager.*commands[tmp - 1])();
 
 		if (tmp == -1)
 		{
 			return 0;
 		}
 
-		
 	}
 
-
-	//Date date;
-	////cout << date.toString();
-	//Account account(1,10000);
-	//cout << account.toString();
 }
