@@ -11,8 +11,16 @@ Account::Account(int accountId, long long money) throw(const char*) {
     this->money = money;
 }
 
+int Account::getAccountId() const {
+    return this->accountId;
+}
+
 long long Account::getMoney() const {
     return this->money;
+}
+
+Date Account::getDate() const {
+    return this->regDate;
 }
 
 bool Account::deposit(long long money) {

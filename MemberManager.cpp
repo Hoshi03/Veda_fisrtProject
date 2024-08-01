@@ -38,8 +38,39 @@ vector<Member>* MemberManager::readFile() {
 	return vectorPtr;
 }
 
+void MemberManager::writeFile() {
+	ofstream fout("C:\\Users\\change08\\Desktop\\Veda_fisrtProject\\info.txt");
+
+	if (!fout.is_open()) {
+		cerr << "Error opening file for writing\n";
+		return;
+	}
+
+	fout << memberList.size() << "\n";
+	for (auto& member : memberList) {
+		fout << member.getName() << " "
+			<< member.getId() << " "
+			<< member.getPwd() << "\n";
+
+		fout << member.getAccount().size() << "\n";
+
+		for (const auto& account : member.getAccount()) {
+			fout << account.getAccountId() << " "
+				<< account.getMoney() << " "
+				<< account.getDate().toString() << "\n";
+		}
+	}
+
+	fout.close();
+}
+
 MemberManager::MemberManager() {
 	this->memberList = *readFile();
+}
+
+MemberManager::~MemberManager() {
+	this->writeFile();
+	delete &(this->memberList);
 }
 
 void MemberManager::registration() {
@@ -132,7 +163,7 @@ void MemberManager::addAccount() {
 
 	Account account(tmpId, tmpMoney);
 
-	currentMember->addAcount(account);
+	currentMember->addAccount(account);
 }
 
 void MemberManager::login() {
