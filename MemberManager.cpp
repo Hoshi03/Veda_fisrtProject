@@ -2,11 +2,12 @@
 #include "MemberManager.h"
 #include "account.h"
 #include <algorithm>
+#include <memory>
 
 using namespace std;
 
-unique_ptr< vector<Member> > MemberManager::readFile() {
-	auto vectorPtr = make_unique<std::vector<Member>>();
+vector<Member>* MemberManager::readFile() {
+	vector<Member>* vectorPtr = new vector<Member>;
 	ifstream fin;
 	fin.open("C:\\Users\\change08\\Desktop\\Veda_fisrtProject\\info.txt");
 
