@@ -1,3 +1,4 @@
+#include <string>
 #include "date.h"
 
 #ifndef DEPOSIT_H
@@ -12,6 +13,7 @@ public:
     long long getMoney() const;
     bool deposit(long long money);
     bool withdraw(long long money);
+    string toString();
 };
 
 #endif //DEPOSIT_H
