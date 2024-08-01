@@ -1,8 +1,7 @@
-#include "MemberManager.h"
+ï»¿#include "MemberManager.h"
 #include <algorithm>
 
 using namespace std;
-
 
 
 MemberManager::MemberManager() {
@@ -10,7 +9,7 @@ MemberManager::MemberManager() {
 }
 
 void MemberManager::registration() {
-	cout << "µî·ÏÇÒ »ç¿ëÀÚ ÀÌ¸§, ID, PW¸¦ ÀÔ·ÂÇØÁÖ¼¼¿ä\n";
+	cout << "enter member name, Id, PW\n";
 	string name, id, pwd;
 	cin >> name >> id >> pwd;
 	Member mem(name, id, pwd);
@@ -20,17 +19,17 @@ void MemberManager::registration() {
 
 void MemberManager::searchAllMember() {
 
-	cout << "¸ðµç µî·ÏµÈ »ç¿ëÀÚ¸¦ °Ë»öÇÕ´Ï´Ù" << '\n';
+	cout << "search all registerd members" << '\n';
 	for (auto i = memberList.begin(); i != memberList.end(); i++)
 	{
-		cout << "ÀÌ¸§ : " <<  (*i).getName() << " ID : " << (*i).getId();
+		cout << "name : " <<  (*i).getName() << " ID : " << (*i).getId();
 		if ((*i).getAccount().empty())
 		{
 			cout << '\n';
 		}
 		else
 		{
-			cout << "»ç¿ëÀÚ °èÁÂ ID, ÀÜ¾× ";
+			cout << "account ID, account balance";
 			vector<Account> tmp = (*i).getAccount();
 			for (auto j =tmp.begin(); j != tmp.end(); j++)
 			{
@@ -44,12 +43,12 @@ bool MemberManager::isRegister(string name) {
 	for (auto i = memberList.begin(); i != memberList.end(); i++)
 	{
 		if (name == (*i).getName()) {
-			cout << "µî·ÏµÈ »ç¿ëÀÚ ÀÔ´Ï´Ù" << '\n';
+			cout << "already registerd member" << '\n';
 			return true;
 		}
 	}
 
-	cout << "µî·ÏµÇÁö ¾ÊÀº »ç¿ëÀÚ ÀÔ´Ï´Ù\n";
+	cout << "not registerd member\n";
 	return false;
 }
 
@@ -63,19 +62,20 @@ Member* MemberManager::getCurrentMember() {
 
 
 void MemberManager::getCurrentMemberStatus() {
+	//cout << "getCurrentMemberStatus ë©”ì„œë“œ í˜¸ì¶œ\n";
 	if (currentMember == NULL)
 	{
-		cout << "·Î±×ÀÎ ÇÏ½Ê¼î\n";
+		cout << "please login\n";
 		return;
 	}
-	cout << "ÀÌ¸§ : " << currentMember->getName() << " ID : " << currentMember->getId();
+	cout << "name : " << currentMember->getName() << " ID : " << currentMember->getId();
 	if (currentMember->getAccount().empty())
 	{
 		cout << '\n';
 	}
 	else
 	{
-		cout << "»ç¿ëÀÚ °èÁÂ ID, ÀÜ¾× ";
+		cout << "account ID, account balance";
 		vector<Account> tmp = currentMember->getAccount();
 		for (auto j = tmp.begin(); j != tmp.end(); j++)
 		{
@@ -87,15 +87,23 @@ void MemberManager::getCurrentMemberStatus() {
 void MemberManager::addAccount() {
 	if (currentMember == NULL)
 	{
-		cout << "·Î±×ÀÎ ÇÏ½Ê¼î\n";
+		cout << "please login\n";
 		return;
 	}
-	currentMember->addAcount();
+
+	int tmpId =  currentMember->getAccount().size() + 1;
+	long long tmpMoney;
+	cout << "enter initial account balance\n";
+	cin >> tmpMoney;
+
+	Account account(tmpId, tmpMoney);
+
+	currentMember->addAcount(account);
 }
 
 void MemberManager::login() {
 	
-	cout << "id¿Í pw¸¦ ÀÔ·ÂÇØÁÖ¼¼¿ä" << '\n';
+	cout << "enter member ID, PW" << '\n';
 	string tmpId, tmpPw;
 	cin >> tmpId >> tmpPw;
 
@@ -109,66 +117,72 @@ void MemberManager::login() {
 		}
 	}
 
-	cout << "·Î±×ÀÎ ½ÇÆÐ\n";
+	cout << "login fail\n";
 }
 
 void MemberManager::logout() {
 	currentMember = NULL;
-	cout << "·Î±×¾Æ¿ô µÇ¾ú½À´Ï´Ù\n";
+	cout << "logout!\n";
 }
 
 void MemberManager::transaction() {
+	//cout << "transaction ë©”ì„œë“œ í˜¸ì¶œ\n";
 	if (currentMember == NULL)
 	{
-		cout << "·Î±×ÀÎ ÇÏ½Ê¼î\n";
+		cout << "please login\n";
 		return;
-		vector<Account> currentAccountList = currentMember->getAccount();
-		if (currentAccountList.empty())
+	}
+
+	vector<Account>& currentAccountList = currentMember->getAccount();
+	if (currentMember->getAccount().empty())
+	{
+		cout << "no account member\n";
+		return;
+	}
+
+	cout << "deposit : 1,  withdraw 2\n";
+	int tmp;
+	cin >> tmp;
+
+	cout << "how much deposit/withdra\n";
+	int inputMoney;
+	cin >> inputMoney;
+
+	if (inputMoney < 0)
+	{
+		cout << "positive integer\n";
+		return;
+	}
+
+	cout << "account list\n";
+
+	for (auto j = currentMember->getAccount().begin(); j != currentMember->getAccount().end(); j++)
+	{
+		cout << (*j).toString();
+	}
+
+	int maxAccountCount = currentMember->getAccount().size();
+
+	int choosedAccountCount;
+	cin >> choosedAccountCount;
+	//cout << "current account max : " << maxAccountCount << "í˜„ìž¬ ê³ ë¥¸ ë²ˆí˜¸ " << choosedAccountCount <<'\n';
+	if (choosedAccountCount > maxAccountCount)
+	{
+		cout << "no that account\n";
+		return;
+	}
+
+	else {
+		if (tmp == 1)
 		{
-			cout << "°èÁÂºÎÅÍ ¸¸µå½Ê¼î\n";
-			return;
-		}
-
-		cout << "ÀÔ±Ý : 1¹ø Ãâ±Ý 2¹ø\n";
-		int tmp;
-		cin >> tmp;
-
-		cout << "ÀÔ/Ãâ±ÝÇÒ ±Ý¾×\n";
-		int inputMoney;
-		cin >> inputMoney;
-
-		if (inputMoney < 0)
-		{
-			cout << "¾ç¼ö·Î ÀÔ·ÂÇÏ½Ê¼î\n";
-			return;
-		}
-
-		cout << "°èÁÂ¸ñ·Ï\n";
-
-		for (auto j = currentAccountList.begin(); j != currentAccountList.end(); j++)
-		{
-			cout << (*j).toString();
-		}
-
-		int maxAccountCount = currentAccountList.size();
-
-		int choosedAccountCount;
-		cin >> choosedAccountCount;
-
-		if (choosedAccountCount < maxAccountCount)
-		{
-			cout << "±×·± °èÁÂ´Â ¾ø¾î¿ä\n";
-			return;
-		}
-
-		else {
-			if (tmp == 1)
-			{
-				currentAccountList[choosedAccountCount].deposit(inputMoney);
+			//cout << "ìž…ê¸ˆ ë©”ì„œë“œ í˜¸ì¶œ" << '\n';
+			if (currentMember->getAccount()[choosedAccountCount].deposit(inputMoney)) {
+				//cout << "ìž…ê¸ˆë˜ì—ˆìŠµë‹ˆë‹¤" << '\n';
 			}
-			else if (tmp == 2) {
-				currentAccountList[choosedAccountCount].withdraw(inputMoney);
-			}
+		}
+		else if (tmp == 2) {
+			//cout << "ì¶œê¸ˆ ë©”ì„œë“œ í˜¸ì¶œ" << '\n';
+			currentMember->getAccount()[choosedAccountCount].withdraw(inputMoney);
 		}
 	}
 }

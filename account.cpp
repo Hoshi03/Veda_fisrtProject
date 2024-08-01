@@ -32,9 +32,9 @@ bool Account::withdraw(long long money) {
 
 string Account::toString() {
     ostringstream oss;
-    oss << "계좌ID "
-        << this->accountId << " | 등록 날짜 : "
-        << this->regDate.toString() << " | 잔액 : "
+    oss << "account ID "
+        << this->accountId << " | account registerd date: "
+        << this->regDate.toString() << " | left : "
         << this->money << '\n';
 
     return oss.str();

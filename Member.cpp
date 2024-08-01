@@ -29,13 +29,6 @@ vector<Account>& Member::getAccount() {
 	return accountList;
 }
 
-void Member::addAcount() {
-	int tmpId = accountList.size() + 1;
-	long long tmpMoney;
-	cout << "계좌의 초기자금을 입력해주세요\n";
-	cin >> tmpMoney;
-
-	Account newAccount(tmpId, tmpMoney);
+void Member::addAcount(Account newAccount) {
 	accountList.push_back(newAccount);
 }
-
