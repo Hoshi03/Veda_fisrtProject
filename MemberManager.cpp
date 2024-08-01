@@ -10,7 +10,7 @@ MemberManager::MemberManager() {
         string numMembers;
         file >> getline(file, numbers);
         int numMembersInt = stoi(numMembers);
-//        file.ignore(); // 개행 문자 무시
+//        file.ignore();
 
         for (int i = 0; i < numMembersInt; ++i) {
             string name, id, pwd;
@@ -22,7 +22,7 @@ MemberManager::MemberManager() {
 
             string numAccounts;
             file >> getline(file, numAccounts);
-//            file.ignore(); // 개행 문자 무시
+//            file.ignore();
             int numAccountsInt = stoi(numAccounts);
 
 
