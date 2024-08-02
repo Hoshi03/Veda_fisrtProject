@@ -34,7 +34,6 @@ vector<Member>* MemberManager::readFile() {
 	}
 
 	fin.close();
-
 	return vectorPtr;
 }
 
@@ -77,6 +76,15 @@ void MemberManager::registration() {
 	cout << "enter member name, Id, PW\n";
 	string name, id, pwd;
 	cin >> name >> id >> pwd;
+	for (auto i = memberList.begin(); i != memberList.end(); i++)
+	{
+		string tmp = (*i).getId();
+		if (tmp == id)
+		{
+			cout << "alreay registered member!\n";
+			return;
+		}
+	}
 	Member mem(name, id, pwd);
 	memberList.push_back(mem);
 }
@@ -87,20 +95,18 @@ void MemberManager::searchAllMember() {
 	cout << "search all registerd members" << '\n';
 	for (auto i = memberList.begin(); i != memberList.end(); i++)
 	{
-		cout << "name : " <<  (*i).getName() << " ID : " << (*i).getId();
-		if ((*i).getAccount().empty())
+		cout << "name : " <<  (*i).getName() << " ID : " << (*i).getId() <<'\n';
+		if (!(*i).getAccount().empty())
 		{
-			cout << '\n';
-		}
-		else
-		{
-			cout << "account ID, account balance";
 			vector<Account> tmp = (*i).getAccount();
+
 			for (auto j =tmp.begin(); j != tmp.end(); j++)
 			{
 				cout << (*j).toString();
 			}
 		}
+
+		else cout << "Haven't opened an account yet\n";
 	}
 }
 
@@ -133,14 +139,11 @@ void MemberManager::getCurrentMemberStatus() {
 		cout << "please login\n";
 		return;
 	}
-	cout << "name : " << currentMember->getName() << " ID : " << currentMember->getId();
-	if (currentMember->getAccount().empty())
+	cout << "name : " << currentMember->getName() << " ID : " << currentMember->getId() << "\n";
+	
+	if (!currentMember->getAccount().empty())
 	{
-		cout << '\n';
-	}
-	else
-	{
-		cout << "account ID, account balance";
+		//cout << " account ID, account balance ";
 		vector<Account> tmp = currentMember->getAccount();
 		for (auto j = tmp.begin(); j != tmp.end(); j++)
 		{
@@ -175,14 +178,39 @@ void MemberManager::login() {
 
 	for (auto i = memberList.begin(); i != memberList.end(); i++)
 	{
-		if ((*i).getId() == tmpId && (*i).getPwd() == tmpPw)
+		/*if ((*i).getId() == tmpId && (*i).getPwd() == tmpPw)
 		{
+			cout << "login success\n";
 			setCurrentMember(&(*i));
 			return;
+		}*/
+
+
+
+		if ((*i).getId() == tmpId)
+		{
+			if ((*i).getPwd() == tmpPw) {
+				cout << "login success\n";
+				setCurrentMember(&(*i));
+				return;
+			}
+			else {
+				cout << "password error!\n";
+				cout << "login fail\n";
+
+				return;
+			}
+		}
+		else {
+
+			cout << "Id not exist!\n";
+			cout << "login fail\n";
+
+			return;
+
 		}
 	}
 
-	cout << "login fail\n";
 }
 
 void MemberManager::logout() {
