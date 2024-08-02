@@ -170,9 +170,13 @@ void MemberManager::addAccount() {
 	cout << "enter initial account balance\n";
 	cin >> tmpMoney;
 
-	Account account(tmpId, tmpMoney);
-
-	currentMember->addAccount(account);
+	try {
+		Account account(tmpId, tmpMoney);
+		currentMember->addAccount(account);
+	} catch (const char* err) {
+		cout << err << '\n';
+		return;
+	}
 }
 
 void MemberManager::login() {
