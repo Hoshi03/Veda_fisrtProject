@@ -29,6 +29,6 @@ vector<Account>& Member::getAccount() {
 	return accountList;
 }
 
-void Member::addAcount(Account newAccount) {
+void Member::addAccount(Account newAccount) {
 	accountList.push_back(newAccount);
 }

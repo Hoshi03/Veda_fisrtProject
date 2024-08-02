@@ -12,7 +12,7 @@ class MemberManager
     Member* currentMember = NULL;
 
     // File IO 함수
-    static vector<Member>* readFile();
+    vector<Member>* readFile();
     void writeFile();
 public:
     MemberManager();

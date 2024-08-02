@@ -70,7 +70,7 @@ MemberManager::MemberManager() {
 
 MemberManager::~MemberManager() {
 	this->writeFile();
-	delete &(this->memberList);
+	/*delete &(this->memberList);*/
 }
 
 void MemberManager::registration() {
