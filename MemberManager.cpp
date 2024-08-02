@@ -155,6 +155,8 @@ void MemberManager::getCurrentMemberStatus() {
 			cout << (*j).toString();
 		}
 	}
+
+	else cout << "Haven't opened an account yet\n";
 }
 
 void MemberManager::addAccount() {
