@@ -6,8 +6,7 @@
 
 using namespace std;
 
-vector<Member>* MemberManager::readFile() {
-	vector<Member>* vectorPtr = new vector<Member>;
+void MemberManager::readFile() {
 	ifstream fin;
 #if defined(_WIN32) || defined(_WIN64)
 	fin.open("C:\\Users\\change08\\Desktop\\Veda_fisrtProject\\info.txt");
@@ -15,7 +14,7 @@ vector<Member>* MemberManager::readFile() {
 	fin.open("info.txt");
 #endif
 	if (!fin.is_open()) {
-		return vectorPtr;
+		return;
 	}
 	int memberCount;
 	fin >> memberCount;
@@ -24,7 +23,7 @@ vector<Member>* MemberManager::readFile() {
 	int accountCount;
 	for (int i = 0; i < memberCount; i++) {
 		fin >> name >> id >> pwd;
-		(*vectorPtr).emplace_back(Member(name, id, pwd));
+		this->memberList.emplace_back(Member(name, id, pwd));
 		fin >> accountCount;
 
 		int accountId;
@@ -32,13 +31,11 @@ vector<Member>* MemberManager::readFile() {
 		string date;
 		for (int j = 0; j < accountCount; j++) {
 			fin >> accountId >> money >> date;
-			(*vectorPtr)[i].addAccount(Account(accountId, money, Date(date)));
+			this->memberList[i].addAccount(Account(accountId, money, Date(date)));
 		}
 	}
 
 	fin.close();
-
-	return vectorPtr;
 }
 
 void MemberManager::writeFile() {
@@ -71,7 +68,7 @@ void MemberManager::writeFile() {
 }
 
 MemberManager::MemberManager() {
-	this->memberList = *readFile();
+	readFile();
 }
 
 MemberManager::~MemberManager() {
