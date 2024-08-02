@@ -114,7 +114,7 @@ void MemberManager::searchAllMember() {
 	}
 }
 
-bool MemberManager::isRegister(string name) {
+bool MemberManager::isRegister(string name) const {
 	//line();
 	for (auto i = memberList.begin(); i != memberList.end(); i++)
 	{
@@ -132,7 +132,7 @@ void MemberManager::setCurrentMember(Member *member) {
 	currentMember = member;
 }
 
-Member* MemberManager::getCurrentMember() {
+Member* MemberManager::getCurrentMember() const {
 	return currentMember;
 }
 
@@ -170,9 +170,13 @@ void MemberManager::addAccount() {
 	cout << "enter initial account balance\n";
 	cin >> tmpMoney;
 
-	Account account(tmpId, tmpMoney);
-
-	currentMember->addAccount(account);
+	try {
+		Account account(tmpId, tmpMoney);
+		currentMember->addAccount(account);
+	} catch (const char* err) {
+		cout << err << '\n';
+		return;
+	}
 }
 
 void MemberManager::login() {

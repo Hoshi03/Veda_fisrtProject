@@ -4,8 +4,8 @@
 #include "date.h"
 
 Account::Account(int accountId, long long money) throw(const char*) {
-    if (accountId < 0) throw "계좌 ID는 양수여야 합니다.\n";
-    if (money < 0) throw "잔액은 음수일 수 없습니다.\n";
+    if (accountId < 0) throw "accut ID should be a positive integer.\n";
+    if (money < 0) throw "balance cannot be negative number.\n";
     this->regDate = Date();
     this->accountId = accountId;
     this->money = money;

@@ -136,7 +136,6 @@
   <ItemGroup>
     <ClInclude Include="account.h" />
     <ClInclude Include="date.h" />
-    <ClInclude Include="line.h" />
     <ClInclude Include="Member.h" />
     <ClInclude Include="MemberManager.h" />
   </ItemGroup>

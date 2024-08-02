@@ -1,6 +1,5 @@
 #include "Member.h"
 
-
 Member::Member() {
 	this->name = "test";
 	this->id = "test";
@@ -13,15 +12,15 @@ Member::Member(string name, string id, string pwd) {
 	this->pwd = pwd;
 }
 
-string Member::getName() {
+string Member::getName() const {
 	return name;
 }
 
-string Member::getId() {
+string Member::getId() const {
 	return id;
 }
 
-string Member::getPwd() {
+string Member::getPwd() const {
 	return pwd;
 }
 
