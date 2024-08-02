@@ -38,7 +38,7 @@ void MemberManager::readFile() {
 	fin.close();
 }
 
-void MemberManager::writeFile() {
+void MemberManager::writeFile() const {
 #if defined(_WIN32) || defined(_WIN64)
 	ofstream fout("C:\\Users\\change08\\Desktop\\Veda_fisrtProject\\info.txt");
 #else
@@ -111,7 +111,7 @@ void MemberManager::searchAllMember() {
 	}
 }
 
-bool MemberManager::isRegister(string name) {
+bool MemberManager::isRegister(string name) const {
 	for (auto i = memberList.begin(); i != memberList.end(); i++)
 	{
 		if (name == (*i).getName()) {
@@ -128,7 +128,7 @@ void MemberManager::setCurrentMember(Member *member) {
 	currentMember = member;
 }
 
-Member* MemberManager::getCurrentMember() {
+Member* MemberManager::getCurrentMember() const {
 	return currentMember;
 }
 
@@ -164,6 +164,7 @@ void MemberManager::addAccount() {
 	cout << "enter initial account balance\n";
 	cin >> tmpMoney;
 
+	// try-catch 예외 처리 추가
 	Account account(tmpId, tmpMoney);
 
 	currentMember->addAccount(account);

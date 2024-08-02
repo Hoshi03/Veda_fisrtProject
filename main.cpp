@@ -1,7 +1,5 @@
 ﻿#include <iostream>
 #include "MemberManager.h"
-#include "date.h"
-#include "account.h"
 
 using namespace std;
 

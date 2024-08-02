@@ -1,6 +1,5 @@
 #include "Member.h"
 
-
 Member::Member() {
 	this->name = "test";
 	this->id = "test";
