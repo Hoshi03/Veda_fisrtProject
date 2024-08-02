@@ -13,10 +13,10 @@ class Member{
     public:
         Member();
         Member(string name, string id, string pwd);
-        string getName();
-        string getId();
-        string getPwd();
-        vector<Account>& getAccount();
+        string getName() const;
+        string getId() const;
+        string getPwd() const;
+        vector<Account>& getAccount() const;
 
         void addAccount(Account newAccount);
 

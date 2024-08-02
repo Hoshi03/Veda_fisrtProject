@@ -13,19 +13,19 @@ Member::Member(string name, string id, string pwd) {
 	this->pwd = pwd;
 }
 
-string Member::getName() {
+string Member::getName() const {
 	return name;
 }
 
-string Member::getId() {
+string Member::getId() const {
 	return id;
 }
 
-string Member::getPwd() {
+string Member::getPwd() const {
 	return pwd;
 }
 
-vector<Account>& Member::getAccount() {
+vector<Account>& Member::getAccount() const {
 	return accountList;
 }
 
