@@ -3,6 +3,7 @@
 #include "account.h"
 #include <algorithm>
 #include <memory>
+#include "line.h"
 
 using namespace std;
 
@@ -90,11 +91,13 @@ void MemberManager::registration() {
 	}
 	Member mem(name, id, pwd);
 	memberList.push_back(mem);
+	//line();
+
 }
 
 
 void MemberManager::searchAllMember() {
-
+	line();
 	cout << "search all registerd members" << '\n';
 	for (auto i = memberList.begin(); i != memberList.end(); i++)
 	{
@@ -112,6 +115,7 @@ void MemberManager::searchAllMember() {
 }
 
 bool MemberManager::isRegister(string name) {
+	//line();
 	for (auto i = memberList.begin(); i != memberList.end(); i++)
 	{
 		if (name == (*i).getName()) {
@@ -134,6 +138,7 @@ Member* MemberManager::getCurrentMember() {
 
 
 void MemberManager::getCurrentMemberStatus() {
+	//line();
 	//cout << "getCurrentMemberStatus 메서드 호출\n";
 	if (currentMember == NULL)
 	{
@@ -153,6 +158,7 @@ void MemberManager::getCurrentMemberStatus() {
 }
 
 void MemberManager::addAccount() {
+	//line();
 	if (currentMember == NULL)
 	{
 		cout << "please login\n";
@@ -170,6 +176,7 @@ void MemberManager::addAccount() {
 }
 
 void MemberManager::login() {
+	//line();
 	
 	cout << "enter member ID, PW" << '\n';
 	string tmpId, tmpPw;
@@ -200,11 +207,17 @@ void MemberManager::login() {
 }
 
 void MemberManager::logout() {
+	//line();
+	if (currentMember == NULL)
+	{
+		cout << "not logged in!\n";
+	}
 	currentMember = NULL;
 	cout << "logout!\n";
 }
 
 void MemberManager::transaction() {
+	//line();
 	//cout << "transaction 메서드 호출\n";
 	if (currentMember == NULL)
 	{
