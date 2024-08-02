@@ -16,7 +16,7 @@ class Member{
         string getName() const;
         string getId() const;
         string getPwd() const;
-        vector<Account>& getAccount() const;
+        vector<Account>& getAccount();
 
         void addAccount(Account newAccount);
 

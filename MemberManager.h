@@ -12,7 +12,7 @@ class MemberManager
     bool isRegister(string name) const;
     // File IO 함수
     void readFile();
-    void writeFile() const;
+    void writeFile();
 public:
     MemberManager();
     ~MemberManager();

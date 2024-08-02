@@ -24,7 +24,7 @@ string Member::getPwd() const {
 	return pwd;
 }
 
-vector<Account>& Member::getAccount() const {
+vector<Account>& Member::getAccount() {
 	return accountList;
 }
 
