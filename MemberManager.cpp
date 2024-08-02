@@ -178,15 +178,6 @@ void MemberManager::login() {
 
 	for (auto i = memberList.begin(); i != memberList.end(); i++)
 	{
-		/*if ((*i).getId() == tmpId && (*i).getPwd() == tmpPw)
-		{
-			cout << "login success\n";
-			setCurrentMember(&(*i));
-			return;
-		}*/
-
-
-
 		if ((*i).getId() == tmpId)
 		{
 			if ((*i).getPwd() == tmpPw) {
@@ -197,23 +188,22 @@ void MemberManager::login() {
 			else {
 				cout << "password error!\n";
 				cout << "login fail\n";
-
 				return;
 			}
 		}
-		else {
-
-			cout << "Id not exist!\n";
-			cout << "login fail\n";
-
-			return;
-
-		}
 	}
-
+	cout << "Id not exist!\n";
+	cout << "login fail\n";
+	return;
 }
 
 void MemberManager::logout() {
+	if (currentMember = NULL)
+	{
+		cout << "you didn't login!\n";
+		return;
+	}
+
 	currentMember = NULL;
 	cout << "logout!\n";
 }
@@ -237,16 +227,6 @@ void MemberManager::transaction() {
 	int tmp;
 	cin >> tmp;
 
-	cout << "how much deposit/withdra\n";
-	int inputMoney;
-	cin >> inputMoney;
-
-	if (inputMoney < 0)
-	{
-		cout << "positive integer\n";
-		return;
-	}
-
 	cout << "account list\n";
 
 	for (auto j = currentMember->getAccount().begin(); j != currentMember->getAccount().end(); j++)
@@ -254,28 +234,42 @@ void MemberManager::transaction() {
 		cout << (*j).toString();
 	}
 
+
+
 	int maxAccountCount = currentMember->getAccount().size();
 
 	int choosedAccountCount;
 	cin >> choosedAccountCount;
+	int tmps = choosedAccountCount - 1;
 	//cout << "current account max : " << maxAccountCount << "현재 고른 번호 " << choosedAccountCount <<'\n';
-	if (choosedAccountCount > maxAccountCount)
+	if (tmps > maxAccountCount)
 	{
 		cout << "no that account\n";
 		return;
 	}
 
 	else {
+
+		cout << "how much deposit/withdraw\n";
+		int inputMoney;
+		cin >> inputMoney;
+
+		if (inputMoney < 0)
+		{
+			cout << "positive integer\n";
+			return;
+		}
+
 		if (tmp == 1)
 		{
 			//cout << "입금 메서드 호출" << '\n';
-			if (currentMember->getAccount()[choosedAccountCount].deposit(inputMoney)) {
-				//cout << "입금되었습니다" << '\n';
+			if (currentMember->getAccount()[tmps].deposit(inputMoney)) {
+				cout << "deposit success\n";
 			}
 		}
 		else if (tmp == 2) {
-			//cout << "출금 메서드 호출" << '\n';
-			currentMember->getAccount()[choosedAccountCount].withdraw(inputMoney);
+			currentMember->getAccount()[tmps].withdraw(inputMoney);
+			cout << "withdraw success\n";
 		}
 	}
 }
